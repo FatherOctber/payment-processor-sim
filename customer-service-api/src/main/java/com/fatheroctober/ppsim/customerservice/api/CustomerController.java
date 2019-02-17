@@ -1,5 +1,6 @@
 package com.fatheroctober.ppsim.customerservice.api;
 
+import com.fatheroctober.ppsim.customerservice.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +14,17 @@ import javax.validation.Valid;
 public class CustomerController {
 
     @Autowired
+    private ICustomerService customerService;
+
+    @Autowired
     private Formatter formatter;
 
     @PostMapping("/auth")
     public TransactionRs auth(@Valid @RequestBody final CardInfo cardInfo) {
         formatter.validateCardInfo(cardInfo);
-        return new TransactionRs().status(Status.SUCCESS);
+        String transId = customerService.auth(cardInfo.getCardNumber(), cardInfo.getExpirationDate(), cardInfo.getCvc2());
+        return new TransactionRs()
+                .transactionId(transId)
+                .status(Status.SUCCESS);
     }
 }
