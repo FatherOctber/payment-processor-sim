@@ -26,6 +26,7 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/CardInfo"
+
       responses:
         200:
           description: "OK"
@@ -52,6 +53,11 @@ definitions:
       cvc2:
         type: string
         pattern: "[0-9]{3}"
+    example:
+        cardNumber: "123412341234"
+        expirationDate: "12/12"
+        cvc2: "007"
+
 
   TransactionRs:
     type: object
@@ -62,6 +68,9 @@ definitions:
         type: string
       status:
         $ref: "#/definitions/Status"
+    example:
+        status: "success"
+        transactionId: "tr12345"
 
   Status:
     type: string

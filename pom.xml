@@ -20,7 +20,7 @@
     </modules>
 
     <properties>
-        <swagger.version>1.5.16</swagger.version>
+        <swagger.version>1.5.21</swagger.version>
         <spock.version>1.1-groovy-2.4</spock.version>
     </properties>
 
