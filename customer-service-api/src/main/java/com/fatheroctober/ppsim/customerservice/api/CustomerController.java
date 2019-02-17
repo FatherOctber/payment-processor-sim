@@ -1,5 +1,6 @@
 package com.fatheroctober.ppsim.customerservice.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +12,12 @@ import javax.validation.Valid;
 @RequestMapping(value = "/ppsim/api/v1", produces = "application/json")
 public class CustomerController {
 
+    @Autowired
+    private Formatter formatter;
+
     @PostMapping("/auth")
-    public TransactionRs auth(@Valid @RequestBody CardInfo cardInfo) {
+    public TransactionRs auth(@Valid @RequestBody final CardInfo cardInfo) {
+        formatter.validateCardInfo(cardInfo);
         return new TransactionRs().status(Status.SUCCESS);
     }
 }
