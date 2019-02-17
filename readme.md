@@ -1,0 +1,1 @@
+Simulator of payment processor`s behaviour. 
