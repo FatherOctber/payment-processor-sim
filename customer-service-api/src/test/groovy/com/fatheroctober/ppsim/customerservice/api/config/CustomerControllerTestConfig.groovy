@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import
 class CustomerControllerTestConfig {
 
     @Bean
-    com.fatheroctober.ppsim.customerservice.api.Formatter formatter() {
+    Formatter formatter() {
         new Formatter()
     }
 

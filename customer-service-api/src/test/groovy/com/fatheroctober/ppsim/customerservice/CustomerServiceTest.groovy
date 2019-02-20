@@ -1,8 +1,8 @@
 package com.fatheroctober.ppsim.customerservice
 
-import com.fatheroctober.ppsim.customerservice.infrastructure.ILogRecord
-import com.fatheroctober.ppsim.customerservice.infrastructure.IPublisher
-import com.fatheroctober.ppsim.customerservice.model.CustomerMessage
+import com.fatheroctober.ppsim.infrastructure.ILogRecord
+import com.fatheroctober.ppsim.infrastructure.IPublisher
+import com.fatheroctober.ppsim.model.CustomerMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification

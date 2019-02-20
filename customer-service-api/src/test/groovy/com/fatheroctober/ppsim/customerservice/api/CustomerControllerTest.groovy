@@ -1,7 +1,7 @@
 package com.fatheroctober.ppsim.customerservice.api
 
 import com.fatheroctober.ppsim.customerservice.api.config.CustomerControllerTestConfig
-import com.fatheroctober.ppsim.customerservice.model.Transaction
+import com.fatheroctober.ppsim.model.Transaction
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 

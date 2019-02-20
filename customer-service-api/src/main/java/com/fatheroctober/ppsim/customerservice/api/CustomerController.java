@@ -1,7 +1,7 @@
 package com.fatheroctober.ppsim.customerservice.api;
 
 import com.fatheroctober.ppsim.customerservice.ICustomerService;
-import com.fatheroctober.ppsim.customerservice.model.Transaction;
+import com.fatheroctober.ppsim.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 
 @RestController
 @RequestMapping(value = "/ppsim/api/v1", produces = "application/json")

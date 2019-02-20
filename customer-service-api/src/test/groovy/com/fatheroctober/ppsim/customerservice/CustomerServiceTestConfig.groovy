@@ -1,8 +1,8 @@
 package com.fatheroctober.ppsim.customerservice
 
-import com.fatheroctober.ppsim.customerservice.infrastructure.IPublisher
-import com.fatheroctober.ppsim.customerservice.infrastructure.KafkaPartition
-import com.fatheroctober.ppsim.customerservice.model.CustomerMessage
+import com.fatheroctober.ppsim.infrastructure.IPublisher
+import com.fatheroctober.ppsim.infrastructure.KafkaPartition
+import com.fatheroctober.ppsim.model.CustomerMessage
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import spock.mock.DetachedMockFactory

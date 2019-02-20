@@ -1,4 +1,4 @@
-package com.fatheroctober.ppsim.customerservice.infrastructure;
+package com.fatheroctober.ppsim.infrastructure;
 
 import com.google.common.collect.ImmutableMap;
 import org.apache.kafka.clients.admin.AdminClient;

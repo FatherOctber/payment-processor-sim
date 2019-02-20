@@ -1,4 +1,4 @@
-package com.fatheroctober.ppsim.customerservice.model;
+package com.fatheroctober.ppsim.model;
 
 import lombok.Value;
 

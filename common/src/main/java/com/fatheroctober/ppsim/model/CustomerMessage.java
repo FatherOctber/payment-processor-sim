@@ -1,4 +1,4 @@
-package com.fatheroctober.ppsim.customerservice.model;
+package com.fatheroctober.ppsim.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,10 +1,11 @@
 package com.fatheroctober.ppsim.customerservice.config;
 
 import com.fatheroctober.ppsim.customerservice.api.CustomerControllerInterceptor;
-import com.fatheroctober.ppsim.customerservice.infrastructure.IPublisher;
-import com.fatheroctober.ppsim.customerservice.infrastructure.KafkaPartition;
-import com.fatheroctober.ppsim.customerservice.infrastructure.KafkaPublisher;
-import com.fatheroctober.ppsim.customerservice.model.CustomerMessage;
+import com.fatheroctober.ppsim.infrastructure.IPublisher;
+import com.fatheroctober.ppsim.infrastructure.KafkaConfiguration;
+import com.fatheroctober.ppsim.infrastructure.KafkaPartition;
+import com.fatheroctober.ppsim.infrastructure.KafkaPublisher;
+import com.fatheroctober.ppsim.model.CustomerMessage;
 import lombok.SneakyThrows;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -26,6 +28,7 @@ import static java.util.Collections.singletonList;
 @Configuration
 @EnableWebMvc
 @EnableConfigurationProperties(CustomerServiceProperties.class)
+@Import(KafkaConfiguration.class)
 public class CustomerServiceConfig implements WebMvcConfigurer {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerServiceConfig.class);

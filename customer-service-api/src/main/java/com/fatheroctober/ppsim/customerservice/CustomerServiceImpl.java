@@ -1,10 +1,10 @@
 package com.fatheroctober.ppsim.customerservice;
 
-import com.fatheroctober.ppsim.customerservice.infrastructure.ILogRecord;
-import com.fatheroctober.ppsim.customerservice.infrastructure.IPublisher;
-import com.fatheroctober.ppsim.customerservice.infrastructure.KafkaPartition;
-import com.fatheroctober.ppsim.customerservice.model.CustomerMessage;
-import com.fatheroctober.ppsim.customerservice.model.Transaction;
+import com.fatheroctober.ppsim.infrastructure.ILogRecord;
+import com.fatheroctober.ppsim.infrastructure.IPublisher;
+import com.fatheroctober.ppsim.infrastructure.KafkaPartition;
+import com.fatheroctober.ppsim.model.CustomerMessage;
+import com.fatheroctober.ppsim.model.Transaction;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     private final IPublisher<CustomerMessage> messagePublisher;
     private final KafkaPartition partition;
-    private long transactionId = 0; //todo replace it by Redis.inc
+    private long transactionId = 0; //todo replace it by Redis.inc (current - not thread-safe)
 
 
     public CustomerServiceImpl(IPublisher<CustomerMessage> messagePublisher, KafkaPartition partition) {
