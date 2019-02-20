@@ -1,7 +1,7 @@
 package com.fatheroctober.ppsim.customerservice.api
 
 import com.fatheroctober.ppsim.customerservice.ICustomerService
-import com.fatheroctober.ppsim.customerservice.api.config.CustomerServiceTestConfig
+import com.fatheroctober.ppsim.customerservice.api.config.CustomerControllerTestConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.util.ResourceUtils
 import spock.lang.Specification
 
-@ContextConfiguration(classes = [CustomerServiceTestConfig.class])
+@ContextConfiguration(classes = [CustomerControllerTestConfig.class])
 class CustomerControllerTestBase extends Specification {
     @Autowired
     ICustomerService customerService

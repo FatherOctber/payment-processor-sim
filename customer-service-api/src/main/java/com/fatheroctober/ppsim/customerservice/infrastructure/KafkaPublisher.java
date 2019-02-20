@@ -25,7 +25,7 @@ public class KafkaPublisher<T> implements IPublisher<T> {
             if (exception != null) {
                 logger.error("Fail to send {}", data);
             } else {
-                logger.info("{} was send", data);
+                logger.info("{} was successfully send to partition {}", data, metadata.partition());
             }
         });
     }

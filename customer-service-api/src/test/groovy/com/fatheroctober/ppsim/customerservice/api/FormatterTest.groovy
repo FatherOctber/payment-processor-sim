@@ -1,11 +1,11 @@
 package com.fatheroctober.ppsim.customerservice.api
 
-import com.fatheroctober.ppsim.customerservice.api.config.CustomerServiceTestConfig
+import com.fatheroctober.ppsim.customerservice.api.config.CustomerControllerTestConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-@ContextConfiguration(classes = [CustomerServiceTestConfig.class])
+@ContextConfiguration(classes = [CustomerControllerTestConfig.class])
 class FormatterTest extends Specification {
     @Autowired
     Formatter formatter

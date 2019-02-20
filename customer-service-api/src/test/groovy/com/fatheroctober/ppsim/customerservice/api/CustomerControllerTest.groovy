@@ -1,6 +1,6 @@
 package com.fatheroctober.ppsim.customerservice.api
 
-import com.fatheroctober.ppsim.customerservice.api.config.CustomerServiceTestConfig
+import com.fatheroctober.ppsim.customerservice.api.config.CustomerControllerTestConfig
 import com.fatheroctober.ppsim.customerservice.model.Transaction
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@ContextConfiguration(classes = [CustomerServiceTestConfig.class])
+@ContextConfiguration(classes = [CustomerControllerTestConfig.class])
 class CustomerControllerTest extends CustomerControllerTestBase {
 
     def "controller returns successful transaction response"() {

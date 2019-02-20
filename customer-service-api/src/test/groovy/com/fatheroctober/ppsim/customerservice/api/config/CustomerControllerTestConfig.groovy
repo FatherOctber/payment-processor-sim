@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import
 @Import([
         MockedServiceConfig.class
 ])
-class CustomerServiceTestConfig {
+class CustomerControllerTestConfig {
 
     @Bean
     com.fatheroctober.ppsim.customerservice.api.Formatter formatter() {
