@@ -76,3 +76,4 @@ definitions:
     type: string
     enum:
       - success
+      - error

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping(value = "/ppsim/api/v1", produces = "application/json")
@@ -25,7 +26,7 @@ public class CustomerController {
         formatter.validateCardInfo(cardInfo);
         Transaction transaction = customerService.auth(cardInfo.getCardNumber(), cardInfo.getExpirationDate(), cardInfo.getCvc2());
         return new TransactionRs()
-                .transactionId(transaction.getId())
+                .transactionId(String.valueOf(transaction.getId()))
                 .status(Status.SUCCESS);
     }
 }

@@ -14,4 +14,8 @@ public class CustomerServiceProperties {
     @Getter
     @Setter
     private String kafkaTopic;
+
+    @Getter
+    @Setter
+    private int partitions;
 }

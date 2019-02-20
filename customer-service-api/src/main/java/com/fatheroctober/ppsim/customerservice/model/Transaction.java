@@ -1,10 +1,8 @@
 package com.fatheroctober.ppsim.customerservice.model;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
 
-@Builder
+@Value
 public class Transaction {
-    @Getter
-    private String id;
+    long id;
 }

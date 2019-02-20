@@ -1,6 +1,7 @@
 package com.fatheroctober.ppsim.customerservice.api
 
 import com.fatheroctober.ppsim.customerservice.api.config.CustomerServiceTestConfig
+import com.fatheroctober.ppsim.customerservice.model.Transaction
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 
@@ -22,7 +23,7 @@ class CustomerControllerTest extends CustomerControllerTestBase {
             assert arguments[0] == '123412341234'
             assert arguments[1] == '12/12'
             assert arguments[2] == '123'
-            'token'
+            new Transaction(777)
         }
 
         expect:
