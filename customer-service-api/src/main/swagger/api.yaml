@@ -1,0 +1,79 @@
+swagger: "2.0"
+info:
+  title: "PP-Sim Customer REST API"
+  version: "0.0.1"
+host: "fatheroctober.com"
+basePath: "/ppsim/api/v1"
+
+schemes:
+- "https"
+
+paths:
+  /auth:
+    post:
+      operationId: auth
+      description: client card authentication
+      tags:
+        - auth
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: cardInfo
+          description: Card information
+          required: true
+          schema:
+            $ref: "#/definitions/CardInfo"
+
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/TransactionRs"
+        400:
+          description: "Bad format of request parameters"
+
+
+definitions:
+  CardInfo:
+    type: object
+    required:
+      - cardNumber
+      - expirationDate
+      - cvc2
+    properties:
+      cardNumber:
+        type: string
+        pattern: "[0-9]{12,16}"
+      expirationDate:
+        type: string
+        pattern: '^\d{2}\/\d{2}$'
+      cvc2:
+        type: string
+        pattern: "[0-9]{3}"
+    example:
+        cardNumber: "123412341234"
+        expirationDate: "12/12"
+        cvc2: "007"
+
+
+  TransactionRs:
+    type: object
+    required:
+      - status
+    properties:
+      transactionId:
+        type: string
+      status:
+        $ref: "#/definitions/Status"
+    example:
+        status: "success"
+        transactionId: "tr12345"
+
+  Status:
+    type: string
+    enum:
+      - success
+      - error
