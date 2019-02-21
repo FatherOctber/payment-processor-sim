@@ -21,7 +21,7 @@ public class StorageOperationRegistry {
 
 
     @Bean
-    public PullDecryptionKey pullDecryptionKey() {
+    public PullKeyFromStorage pullDecryptionKey() {
         return (transaction) -> {
             logger.info("pull for {}", transaction);
             return dao.get(transaction.getId()).map(TransactionKeyRecord::getKey).orElse(null);
@@ -29,7 +29,7 @@ public class StorageOperationRegistry {
     }
 
     @Bean
-    public PushDecryptionKey pushDecryptionKey() {
+    public PushKeyToStorage pushDecryptionKey() {
         return (transactionKeyRecord) -> {
             logger.info("push {}", transactionKeyRecord);
             asyncScheduler.execute(() -> dao.save(transactionKeyRecord));

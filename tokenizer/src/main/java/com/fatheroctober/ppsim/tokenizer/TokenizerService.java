@@ -2,7 +2,6 @@ package com.fatheroctober.ppsim.tokenizer;
 
 import com.fatheroctober.ppsim.common.model.KeyInfo;
 import com.fatheroctober.ppsim.common.model.Token;
-import com.fatheroctober.ppsim.common.persistence.operation.PushDecryptionKey;
 import com.fatheroctober.ppsim.tokenizer.crypter.Crypter;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;

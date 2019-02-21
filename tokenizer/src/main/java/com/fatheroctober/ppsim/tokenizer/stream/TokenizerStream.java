@@ -4,7 +4,7 @@ import com.fatheroctober.ppsim.common.model.KeyInfo;
 import com.fatheroctober.ppsim.common.model.Token;
 import com.fatheroctober.ppsim.common.model.Transaction;
 import com.fatheroctober.ppsim.common.model.TransactionKeyRecord;
-import com.fatheroctober.ppsim.common.persistence.operation.PushDecryptionKey;
+import com.fatheroctober.ppsim.common.persistence.operation.PushKeyToStorage;
 import com.fatheroctober.ppsim.tokenizer.ITokenizerService;
 import com.fatheroctober.ppsim.tokenizer.TokenizerRunner;
 import lombok.SneakyThrows;
@@ -25,7 +25,7 @@ public class TokenizerStream implements Lifecycle {
     private ITokenizerService tokenizer;
 
     @Autowired
-    private PushDecryptionKey storeKeyOperation;
+    private PushKeyToStorage storeKeyOperation;
 
     @Autowired
     @Qualifier("tokenizer-inputTopic")
