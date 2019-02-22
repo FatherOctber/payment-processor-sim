@@ -1,14 +1,9 @@
 package com.fatheroctober.ppsim.tokenizer.stream;
 
-import com.fatheroctober.ppsim.common.model.KeyInfo;
-import com.fatheroctober.ppsim.common.model.Token;
-import com.fatheroctober.ppsim.common.model.Transaction;
-import com.fatheroctober.ppsim.common.model.TransactionKeyRecord;
+import com.fatheroctober.ppsim.common.model.*;
 import com.fatheroctober.ppsim.common.persistence.operation.PushKeyToStorage;
 import com.fatheroctober.ppsim.tokenizer.ITokenizerService;
 import com.fatheroctober.ppsim.tokenizer.TokenizerRunner;
-import lombok.SneakyThrows;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.KStream;
 import org.slf4j.Logger;
@@ -46,13 +41,14 @@ public class TokenizerStream implements Lifecycle {
         KStream<Long, String> customerLogRecord = builder.stream(inputTopic);
 
         customerLogRecord.map((transId, json) -> {
-            Pair<KeyInfo, Token> tokenizationBlock = tokenizer.generateToken(json);
+            logger.info("Generate token for [{},{}]", transId, json);
+            TokenizationBlock tokenizationBlock = tokenizer.generateToken(json);
 
-            KeyInfo keyInfo = tokenizationBlock.getKey();
+            KeyInfo key = tokenizationBlock.getKey();
             Transaction targetTransaction = new Transaction(transId);
-            storeKeyOperation.push(new TransactionKeyRecord(keyInfo, targetTransaction));
+            storeKeyOperation.push(new TransactionKeyRecord(key, targetTransaction));
 
-            return KeyValue.pair(transId, tokenizationBlock.getValue());
+            return KeyValue.pair(transId, tokenizationBlock.getTokenValue());
         }).to(outputTopic);
 
         return builder.build();
@@ -61,13 +57,12 @@ public class TokenizerStream implements Lifecycle {
     @Override
     public void start() {
         streams = new KafkaStreams(topology(), streamsConfig);
-        streams.cleanUp();
+        //streams.cleanUp();
         streams.start();
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
     }
 
     @Override
-    @SneakyThrows(InterruptedException.class)
     public void stop() {
         logger.info("Stop signal was taken, waiting for stopping tokenization stream...");
         streams.close();

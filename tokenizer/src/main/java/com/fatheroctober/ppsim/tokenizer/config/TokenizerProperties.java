@@ -12,10 +12,6 @@ public class TokenizerProperties {
 
     @Getter
     @Setter
-    private String keyWord;
-
-    @Getter
-    @Setter
     private String inputTopic;
 
     @Getter

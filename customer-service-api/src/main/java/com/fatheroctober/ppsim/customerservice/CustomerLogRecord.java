@@ -21,7 +21,7 @@ public class CustomerLogRecord implements ILogRecord<CustomerMessage> {
                 topic,
                 partition,
                 transactionId,
-                message.serealizedContent()
+                message.serializedContent()
         );
     }
 }

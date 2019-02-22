@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.annotation.PostConstruct;
@@ -49,6 +52,11 @@ public class RedisConfig {
         RedisTemplate<String, TransactionKeyRecord> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory());
         template.setEnableTransactionSupport(true);
+
+        RedisSerializer<TransactionKeyRecord> recordSerializer = new Jackson2JsonRedisSerializer<>(TransactionKeyRecord.class);
+        template.setValueSerializer(recordSerializer);
+        template.setHashValueSerializer(recordSerializer);
+
         return template;
     }
 }

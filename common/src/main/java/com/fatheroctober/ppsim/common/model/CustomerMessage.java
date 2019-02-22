@@ -17,7 +17,7 @@ public class CustomerMessage {
 
 
     @SneakyThrows(JsonProcessingException.class)
-    public String serealizedContent() {
+    public String serializedContent() {
         return objectMapper.writeValueAsString(this);
     }
 

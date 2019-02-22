@@ -1,9 +1,10 @@
 package com.fatheroctober.ppsim.tokenizer;
 
-import com.fatheroctober.ppsim.common.model.KeyInfo;
 import com.fatheroctober.ppsim.common.model.Token;
-import com.fatheroctober.ppsim.tokenizer.crypter.Crypter;
-import org.apache.commons.lang3.tuple.Pair;
+import com.fatheroctober.ppsim.common.model.TokenizationBlock;
+import com.fatheroctober.ppsim.common.util.Crypter;
+import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +16,8 @@ public class TokenizerService implements ITokenizerService {
     }
 
     @Override
-    public Pair<KeyInfo, Token> generateToken(String sourceMsg) {
-        return Pair.of(crypter.keyInfo(), new Token(crypter.encrypt(sourceMsg)));
+    public TokenizationBlock generateToken(String sourceMsg) {
+        Preconditions.checkArgument(StringUtils.isNotEmpty(sourceMsg), "source must contains data");
+        return new TokenizationBlock(crypter.keyInfo(), new Token(crypter.encrypt(sourceMsg)));
     }
 }

@@ -1,4 +1,4 @@
-package com.fatheroctober.ppsim.tokenizer.crypter;
+package com.fatheroctober.ppsim.common.util;
 
 import com.fatheroctober.ppsim.common.model.CipherAlgorithm;
 import com.fatheroctober.ppsim.common.model.KeyInfo;
@@ -8,21 +8,20 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
+import javax.crypto.KeyGenerator;
 import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 
 public class Crypter {
     private final Key key;
     private final CipherAlgorithm algo;
-    private final String keyWord;
 
-    @SneakyThrows(IOException.class)
-    public Crypter(String keyWord, CipherAlgorithm algorithm) {
-        final byte[] keyVal = new BASE64Decoder().decodeBuffer(keyWord);
-        this.key = new SecretKeySpec(keyVal, algorithm.toString());
+    @SneakyThrows(NoSuchAlgorithmException.class)
+    public Crypter(CipherAlgorithm algorithm) {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance(algorithm.toString());
+        keyGenerator.init(128);
+        this.key = keyGenerator.generateKey();
         this.algo = algorithm;
-        this.keyWord = keyWord;
     }
 
     public String encrypt(String source) {
@@ -51,6 +50,6 @@ public class Crypter {
     }
 
     public KeyInfo keyInfo() {
-        return new KeyInfo(keyWord, algo);
+        return new KeyInfo(key);
     }
 }

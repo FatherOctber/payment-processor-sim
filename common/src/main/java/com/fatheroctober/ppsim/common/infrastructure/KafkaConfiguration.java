@@ -28,7 +28,7 @@ public class KafkaConfiguration {
 
     @Value("${kafka.bootstrap.servers}")
     private String kafkaBrokers;
-    @Value("${kafka.streams.appid}")
+    @Value("${kafka.streams.appid:streams}")
     private String application;
 
     @PostConstruct

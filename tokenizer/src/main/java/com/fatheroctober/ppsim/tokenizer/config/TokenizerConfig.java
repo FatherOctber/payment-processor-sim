@@ -1,7 +1,7 @@
 package com.fatheroctober.ppsim.tokenizer.config;
 
 import com.fatheroctober.ppsim.common.model.CipherAlgorithm;
-import com.fatheroctober.ppsim.tokenizer.crypter.Crypter;
+import com.fatheroctober.ppsim.common.util.Crypter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ public class TokenizerConfig {
 
     @Bean
     public Crypter crypter() {
-        return new Crypter(properties.getKeyWord(), CipherAlgorithm.forCode(properties.getCipherAlgorithm()));
+        return new Crypter(CipherAlgorithm.forCode(properties.getCipherAlgorithm()));
     }
 
     @Bean

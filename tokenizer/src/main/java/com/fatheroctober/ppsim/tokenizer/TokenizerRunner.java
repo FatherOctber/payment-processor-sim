@@ -28,7 +28,7 @@ public class TokenizerRunner implements ApplicationRunner, ApplicationListener<C
     public void run(ApplicationArguments args) {
         logger.info("Starting tokenizer...");
         lifecycles.forEach(Lifecycle::start);
-        logger.info("tokenizer were started");
+        logger.info("Tokenizer were started");
     }
 
 
@@ -36,7 +36,7 @@ public class TokenizerRunner implements ApplicationRunner, ApplicationListener<C
     public void onApplicationEvent(ContextClosedEvent event) {
         logger.info("Stopping tokenizer...");
         lifecycles.forEach(Lifecycle::stop);
-        logger.info("tokenizer were stopped");
+        logger.info("Tokenizer were stopped");
     }
 
 }
