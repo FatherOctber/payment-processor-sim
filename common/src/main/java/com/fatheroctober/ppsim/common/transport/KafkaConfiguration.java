@@ -1,4 +1,4 @@
-package com.fatheroctober.ppsim.common.infrastructure;
+package com.fatheroctober.ppsim.common.transport;
 
 import com.google.common.collect.ImmutableMap;
 import org.apache.kafka.clients.admin.AdminClient;
@@ -57,7 +57,8 @@ public class KafkaConfiguration {
         Map<String, Object> config = ImmutableMap.of(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class,
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
-                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaBrokers
+                ConsumerConfig.GROUP_ID_CONFIG, "ppconsumer", // dynamic sharing partitions by group
+                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaBrokers
         );
         return new KafkaConsumer<>(config);
     }

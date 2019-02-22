@@ -1,6 +1,6 @@
 package com.fatheroctober.ppsim.customerservice;
 
-import com.fatheroctober.ppsim.common.infrastructure.ILogRecord;
+import com.fatheroctober.ppsim.common.transport.ILogRecord;
 import com.fatheroctober.ppsim.common.model.CustomerMessage;
 import lombok.ToString;
 import org.apache.kafka.clients.producer.ProducerRecord;

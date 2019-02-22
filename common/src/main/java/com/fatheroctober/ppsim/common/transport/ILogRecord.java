@@ -1,4 +1,4 @@
-package com.fatheroctober.ppsim.common.infrastructure;
+package com.fatheroctober.ppsim.common.transport;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 

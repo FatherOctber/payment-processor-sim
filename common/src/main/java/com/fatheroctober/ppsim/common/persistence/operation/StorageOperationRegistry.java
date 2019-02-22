@@ -1,6 +1,7 @@
 package com.fatheroctober.ppsim.common.persistence.operation;
 
 import com.fatheroctober.ppsim.common.model.TransactionKeyRecord;
+import com.fatheroctober.ppsim.common.persistence.Action;
 import com.fatheroctober.ppsim.common.persistence.Dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,9 @@ public class StorageOperationRegistry {
     @Autowired
     private Dao<TransactionKeyRecord> dao;
 
+    @Autowired
+    private Action action;
+
 
     @Bean
     public PullKeyFromStorage pullDecryptionKey() {
@@ -34,5 +38,10 @@ public class StorageOperationRegistry {
             logger.info("Push {}", transactionKeyRecord);
             asyncScheduler.execute(() -> dao.save(transactionKeyRecord));
         };
+    }
+
+    @Bean
+    public GetUniqueId getUniqueId() {
+        return () -> action.generateUniqueId();
     }
 }

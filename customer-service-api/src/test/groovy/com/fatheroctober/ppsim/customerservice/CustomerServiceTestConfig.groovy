@@ -1,8 +1,9 @@
 package com.fatheroctober.ppsim.customerservice
 
-import com.fatheroctober.ppsim.common.infrastructure.IPublisher
-import com.fatheroctober.ppsim.common.infrastructure.KafkaPartition
+import com.fatheroctober.ppsim.common.transport.IPublisher
+import com.fatheroctober.ppsim.common.transport.KafkaPartition
 import com.fatheroctober.ppsim.common.model.CustomerMessage
+import com.fatheroctober.ppsim.common.persistence.operation.GetUniqueId
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import spock.mock.DetachedMockFactory
@@ -17,12 +18,17 @@ class CustomerServiceTestConfig {
     }
 
     @Bean
+    GetUniqueId getUniqueId() {
+        mockFactory.Mock(GetUniqueId)
+    }
+
+    @Bean
     KafkaPartition kafkaPartition() {
         new KafkaPartition(3)
     }
 
     @Bean
     ICustomerService customerService() {
-        new CustomerServiceImpl(messagePublisher(), kafkaPartition())
+        new CustomerService(messagePublisher(), kafkaPartition(), getUniqueId())
     }
 }

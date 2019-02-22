@@ -1,8 +1,9 @@
 package com.fatheroctober.ppsim.customerservice
 
-import com.fatheroctober.ppsim.common.infrastructure.ILogRecord
-import com.fatheroctober.ppsim.common.infrastructure.IPublisher
+import com.fatheroctober.ppsim.common.transport.ILogRecord
+import com.fatheroctober.ppsim.common.transport.IPublisher
 import com.fatheroctober.ppsim.common.model.CustomerMessage
+import com.fatheroctober.ppsim.common.persistence.operation.GetUniqueId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
@@ -16,7 +17,13 @@ class CustomerServiceTest extends Specification {
     @Autowired
     IPublisher<CustomerMessage> messagePublisher
 
+    @Autowired
+    GetUniqueId getUniqueId
+
     def "service send customer info successfully"() {
+        given:
+        def id = 1
+
         when:
         def transaction1 = customerService.auth("123412341234", "12/12", "777")
         def transaction2 = customerService.auth("123412341234", "12/12", "777")
@@ -27,6 +34,8 @@ class CustomerServiceTest extends Specification {
             assert arguments[0].getLeft() instanceof ILogRecord<CustomerMessage>
             assert arguments[0].getRight() instanceof CustomerMessage
         }
+        3 * getUniqueId.get() >> { arg -> id++ }
+
 
         expect:
         transaction1.id == 1

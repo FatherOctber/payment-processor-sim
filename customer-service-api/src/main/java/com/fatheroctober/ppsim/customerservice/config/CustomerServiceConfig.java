@@ -1,10 +1,10 @@
 package com.fatheroctober.ppsim.customerservice.config;
 
 import com.fatheroctober.ppsim.customerservice.api.CustomerControllerInterceptor;
-import com.fatheroctober.ppsim.common.infrastructure.IPublisher;
-import com.fatheroctober.ppsim.common.infrastructure.KafkaConfiguration;
-import com.fatheroctober.ppsim.common.infrastructure.KafkaPartition;
-import com.fatheroctober.ppsim.common.infrastructure.KafkaPublisher;
+import com.fatheroctober.ppsim.common.transport.IPublisher;
+import com.fatheroctober.ppsim.common.transport.KafkaConfiguration;
+import com.fatheroctober.ppsim.common.transport.KafkaPartition;
+import com.fatheroctober.ppsim.common.transport.KafkaPublisher;
 import com.fatheroctober.ppsim.common.model.CustomerMessage;
 import lombok.SneakyThrows;
 import org.apache.kafka.clients.admin.AdminClient;
