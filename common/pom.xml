@@ -9,13 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>consumer</artifactId>
-
+    <artifactId>common</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.fatheroctober</groupId>
-            <artifactId>common</artifactId>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
     </dependencies>
 
