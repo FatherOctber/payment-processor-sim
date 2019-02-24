@@ -15,5 +15,9 @@ public class ConsumerProperties {
     @Setter
     private String topic;
 
+    @Getter
+    @Setter
+    private String dataLogFile;
+
 
 }
