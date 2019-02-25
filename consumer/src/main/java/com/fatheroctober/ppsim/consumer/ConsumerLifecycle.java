@@ -45,6 +45,7 @@ public class ConsumerLifecycle implements Lifecycle, Runnable {
                 consumer.commitAsync();
             }
         }
+        consumer.close(); // because consumer has prototype scope
         logger.info("Stop consumer-{} polling", id);
     }
 

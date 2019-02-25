@@ -55,7 +55,7 @@ public class KafkaConfiguration {
         return new KafkaProducer<>(config);
     }
 
-    @Bean(destroyMethod = "close")
+    @Bean
     @Scope("prototype")
     @Profile("consumer")
     public Consumer<Long, String> kafkaConsumer() {

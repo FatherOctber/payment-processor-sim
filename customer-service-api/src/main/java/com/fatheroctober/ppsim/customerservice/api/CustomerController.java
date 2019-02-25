@@ -24,8 +24,12 @@ public class CustomerController {
     public TransactionRs auth(@Valid @RequestBody final CardInfo cardInfo) {
         formatter.validateCardInfo(cardInfo);
         Transaction transaction = customerService.auth(cardInfo.getCardNumber(), cardInfo.getExpirationDate(), cardInfo.getCvc2());
-        return new TransactionRs()
-                .transactionId(String.valueOf(transaction.getId()))
-                .status(Status.SUCCESS);
+        if (transaction != null) {
+            return new TransactionRs()
+                    .transactionId(String.valueOf(transaction.getId()))
+                    .status(Status.SUCCESS);
+        } else {
+            return new TransactionRs().status(Status.ERROR);
+        }
     }
 }
