@@ -5,7 +5,7 @@
 	- Producing tokenized data of customer card info to consumer via Apache Kafka
 	
 ## Workflow:
-	- Customer API endpoing receive	REST request with customer card data via HTTP;
+	- Customer API endpoint receive	REST request with customer card data via HTTP;
 	- Customer service generate unique id for transaction via Redis and sent to Kafka input topic;
 	- Tokenizer Streams listen Kafka input topic and tokenize incoming data by symmetric encription,
 	  save decryption key to Redis and push tokenization data to Kafka output topic;
