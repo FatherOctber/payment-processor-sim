@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class KafkaConfiguration {
     private static Logger logger = LoggerFactory.getLogger(KafkaConfiguration.class);
 
-    @Value("${kafka.bootstrap.servers}")
+    @Value("${kafka.bootstrap.servers:localhost:9092}")
     private String kafkaBrokers;
     @Value("${kafka.streams.appid:streams}")
     private String application;
