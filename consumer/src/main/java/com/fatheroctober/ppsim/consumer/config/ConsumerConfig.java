@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -36,7 +37,8 @@ public class ConsumerConfig {
         if (StringUtils.isNotEmpty(properties.getDataLogFile())) {
             return Paths.get(properties.getDataLogFile());
         } else {
-            return Paths.get("consumerLog.log");
+            Path file = Paths.get(System.getProperty("user.dir"), "consumer.log");
+            return file;
         }
     }
 

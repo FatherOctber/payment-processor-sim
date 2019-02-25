@@ -41,9 +41,7 @@ public class CustomerServiceConfig implements WebMvcConfigurer {
     public CustomerServiceConfig(CustomerServiceProperties properties, AdminClient kafkaAdmin) {
         this.properties = properties;
         this.kafkaAdmin = kafkaAdmin;
-        if (properties.isCreateTopicIfNotExist()) {
-            createTopicIfNotExist(properties.getKafkaTopic());
-        }
+        createNewTopic(properties.getKafkaTopic());
     }
 
     @Bean
@@ -63,13 +61,17 @@ public class CustomerServiceConfig implements WebMvcConfigurer {
     }
 
     @SneakyThrows({InterruptedException.class, ExecutionException.class})
-    private void createTopicIfNotExist(String topic) {
+    private void createNewTopic(String topic) {
         logger.info("Fetching list of topic...");
         Set<String> existentTopics = kafkaAdmin.listTopics().names().get();
         logger.info("Fetched list of topic: {}", existentTopics);
-        if (existentTopics.contains(topic)) return;
-        logger.info("Topic {} doesn't exist, trying create it...", topic);
+        if (existentTopics.contains(topic)) {
+            logger.info("Topic {} has been already existed", topic);
+            return;
+        }
+        logger.info("Topic {} does not exist, trying create it...", topic);
         kafkaAdmin.createTopics(singletonList(new NewTopic(topic, properties.getPartitions(), REPLICATION_FACTOR))).all().get();
         logger.info("Topic {} is created", topic);
     }
+
 }

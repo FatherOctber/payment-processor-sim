@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class ConsumerLifecycle implements Lifecycle, Runnable {
     private static final Logger logger = LoggerFactory.getLogger(ConsumerLifecycle.class);
-    private static final long TIRED_THRESHOLD = 100;
+    private static final long TIRED_THRESHOLD = 10000;
     private final Consumer<Long, String> consumer;
     private final IConsumerService consumerService;
     private final long id;

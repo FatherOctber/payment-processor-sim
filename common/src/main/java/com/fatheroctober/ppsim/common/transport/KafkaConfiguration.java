@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -37,6 +39,7 @@ public class KafkaConfiguration {
     }
 
     @Bean(destroyMethod = "close")
+    @Profile("producer")
     public Producer<Long, String> kafkaProducer() {
         Map<String, Object> config = ImmutableMap.<String, Object>builder().
                 put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class).
@@ -53,6 +56,8 @@ public class KafkaConfiguration {
     }
 
     @Bean(destroyMethod = "close")
+    @Scope("prototype")
+    @Profile("consumer")
     public Consumer<Long, String> kafkaConsumer() {
         Map<String, Object> config = ImmutableMap.of(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class,
@@ -64,6 +69,7 @@ public class KafkaConfiguration {
     }
 
     @Bean(destroyMethod = "close")
+    @Profile({"producer", "streams"})
     public AdminClient kafkaAdminClient() {
         return KafkaAdminClient.create(ImmutableMap.<String, Object>builder().
                 put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaBrokers).
@@ -74,6 +80,7 @@ public class KafkaConfiguration {
     }
 
     @Bean
+    @Profile("streams")
     public StreamsConfig kafksStreamsConfig() {
         return new StreamsConfig(ImmutableMap.<String, Object>builder().
                 put(StreamsConfig.APPLICATION_ID_CONFIG, application).

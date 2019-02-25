@@ -1,9 +1,9 @@
 package com.fatheroctober.ppsim.tokenizer.stream;
 
+import com.fatheroctober.ppsim.common.engine.Lifecycle;
 import com.fatheroctober.ppsim.common.model.*;
 import com.fatheroctober.ppsim.common.persistence.operation.PushKeyToStorage;
 import com.fatheroctober.ppsim.tokenizer.ITokenizerService;
-import com.fatheroctober.ppsim.tokenizer.TokenizerRunner;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.KStream;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TokenizerStream implements Lifecycle {
-    private static final Logger logger = LoggerFactory.getLogger(TokenizerRunner.class);
+    private static final Logger logger = LoggerFactory.getLogger(TokenizerStream.class);
 
     @Autowired
     private ITokenizerService tokenizer;

@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class KafkaPartition {
     int partitionCount;
 
-    private AtomicInteger currentPartition = new AtomicInteger(1);
+    private AtomicInteger currentPartition = new AtomicInteger(0);
 
     /**
      * @return next partition by round-robin principle
@@ -17,7 +17,7 @@ public class KafkaPartition {
         if (partitionCount == 1 || currentPartition.compareAndSet(partitionCount-1, 0)) {
             return 0;
         } else {
-            return currentPartition.incrementAndGet();
+            return currentPartition.getAndIncrement();
         }
     }
 

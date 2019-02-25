@@ -12,10 +12,17 @@ public class TokenizerProperties {
 
     @Getter
     @Setter
-    private String inputTopic;
+    private String kafkaInputTopic;
 
     @Getter
     @Setter
-    private String outputTopic;
+    private String kafkaOutputTopic;
+
+    @Getter
+    @Setter
+    private int partitions;
+
+
+
 
 }

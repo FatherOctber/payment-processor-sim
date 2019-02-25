@@ -14,13 +14,16 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousFileChannel;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ConsumerFileLogService implements ILogService {
     private static final Logger logger = LoggerFactory.getLogger(ConsumerFileLogService.class);
     private final ObjectMapper mapper;
     private Path file;
+    private AtomicInteger logOffset = new AtomicInteger(0);
 
     public ConsumerFileLogService(@Lazy Path logFile) {
         this.file = logFile;
@@ -32,11 +35,10 @@ public class ConsumerFileLogService implements ILogService {
         ObjectNode customerData = customerDataNode(transaction, msg);
         String consumedData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(customerData);
         logger.info("Consumed data: {}", consumedData);
-        try (AsynchronousFileChannel channel = AsynchronousFileChannel.open(file, StandardOpenOption.WRITE,
-                StandardOpenOption.APPEND,
-                StandardOpenOption.CREATE)) {
+        Path currentFile = Paths.get(file.toUri()); // because file has been injected lazy (so it`s proxy)
+        try (AsynchronousFileChannel channel = AsynchronousFileChannel.open(currentFile, StandardOpenOption.WRITE, StandardOpenOption.CREATE)) {
             final ByteBuffer buffer = ByteBuffer.wrap(consumedData.getBytes());
-            channel.write(buffer, 0);
+            channel.write(buffer, buffer.capacity() * logOffset.getAndIncrement());
         } catch (IOException e) {
             throw new RuntimeException("Can`t write data to file", e);
         }

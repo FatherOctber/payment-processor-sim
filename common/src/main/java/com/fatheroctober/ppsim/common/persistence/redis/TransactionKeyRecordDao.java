@@ -31,18 +31,20 @@ public class TransactionKeyRecordDao implements Dao<TransactionKeyRecord> {
 
     @Override
     public Optional<TransactionKeyRecord> get(Long id) {
-        logger.info("Get key for id=" + id);
+        logger.info("Try to get key for id={}...", id);
         Optional<TransactionKeyRecord> keyRecord = Optional.ofNullable(id).map(i -> Optional.ofNullable(hashOps.get(TRANS_RECORD_KEY, i)))
                 .orElseThrow(() -> new RuntimeException("Can not perform operation for transaction with id: " + id));
+        logger.info("Key for id={} was got", id);
         return keyRecord;
     }
 
     @Override
     public Long save(TransactionKeyRecord value) {
         if (value != null) {
-            logger.info("Save transaction key record " + value);
+            logger.info("Try to save transaction key record {}...", value);
             Long id = value.getTransaction().getId();
             hashOps.put(TRANS_RECORD_KEY, id, value);
+            logger.info("Transaction key record {} was saved", value);
             return id;
         } else {
             throw new RuntimeException("Can not save null object");
