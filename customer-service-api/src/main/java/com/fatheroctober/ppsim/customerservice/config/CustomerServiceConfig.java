@@ -71,7 +71,7 @@ public class CustomerServiceConfig implements WebMvcConfigurer {
         }
         logger.info("Topic {} does not exist, trying create it...", topic);
         kafkaAdmin.createTopics(singletonList(new NewTopic(topic, properties.getPartitions(), REPLICATION_FACTOR))).all().get();
-        logger.info("Topic {} is created", topic);
+        logger.info("Topic {} is created with {} partitions", topic, properties.getPartitions());
     }
 
 }

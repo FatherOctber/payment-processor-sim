@@ -14,10 +14,10 @@ public class KafkaPartition {
      * @return next partition by round-robin principle
      */
     public int getNext() {
-        if (partitionCount == 1 || currentPartition.compareAndSet(partitionCount-1, 0)) {
+        if (partitionCount == 1 || currentPartition.compareAndSet(partitionCount - 1, 0)) {
             return 0;
         } else {
-            return currentPartition.getAndIncrement();
+            return currentPartition.incrementAndGet();
         }
     }
 

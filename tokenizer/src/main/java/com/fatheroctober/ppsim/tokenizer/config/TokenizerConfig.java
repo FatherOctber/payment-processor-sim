@@ -59,6 +59,6 @@ public class TokenizerConfig {
         }
         logger.info("Output topic {} does not exist, trying create it...", topic);
         kafkaAdmin.createTopics(singletonList(new NewTopic(topic, properties.getPartitions(), REPLICATION_FACTOR))).all().get();
-        logger.info("Output topic {} is created", topic);
+        logger.info("Output topic {} is created with {} partitions", topic, properties.getPartitions());
     }
 }

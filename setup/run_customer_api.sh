@@ -1,0 +1,1 @@
+$JAVA_HOME/bin/java -Dfile.encoding=UTF-8 -jar "../customer-service-api/target/customer-service-api-1.0-SNAPSHOT.jar" --spring.config.additional-location="/config/customer-api.properties"
